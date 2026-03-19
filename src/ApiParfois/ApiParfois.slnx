@@ -1,3 +1,7 @@
 <Solution>
   <Project Path="Desafio.API/Desafio.API.csproj" />
+  <Project Path="Desafio.Application/Desafio.Application.csproj" />
+  <Project Path="Desafio.Domain/Desafio.Domain.csproj" />
+  <Project Path="Desafio.Infrastructure/Desafio.Infrastructure.csproj" />
+  <Project Path="Desafio.Testes/Desafio.Testes.csproj" />
 </Solution>
