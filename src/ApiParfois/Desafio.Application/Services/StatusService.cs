@@ -7,12 +7,14 @@ namespace Desafio.Application.Services;
 public class StatusService : IStatusService
 {
     private readonly IPedidoRepository _repository;
-    private readonly StatusValidator _validator;
+    private readonly IStatusValidator _validator;
 
-    public StatusService(IPedidoRepository repository)
+    public StatusService(
+        IPedidoRepository repository,
+        IStatusValidator validator)
     {
         _repository = repository;
-        _validator = new StatusValidator();
+        _validator = validator;
     }
 
     public async Task<StatusResponse> ProcessarStatusAsync(StatusRequest request)

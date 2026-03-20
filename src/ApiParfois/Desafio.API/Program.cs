@@ -1,6 +1,7 @@
 using Desafio.API.Middleware;
 using Desafio.Application.Services;
 using Desafio.Domain.Interfaces;
+using Desafio.Application.Validators;
 using Desafio.Infrastructure.Data;
 using Desafio.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 builder.Services.AddScoped<IPedidoService, PedidoService>();
 builder.Services.AddScoped<IStatusService, StatusService>();
+builder.Services.AddScoped<IStatusValidator, StatusValidator>();
 
 var app = builder.Build();
 
