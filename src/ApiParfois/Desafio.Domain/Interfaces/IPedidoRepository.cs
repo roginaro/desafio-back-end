@@ -11,4 +11,6 @@ public interface IPedidoRepository
     Task AtualizarAsync(Pedido pedido);
     Task RemoverAsync(int id);
     Task<bool> ExisteAsync(string numeroPedido);
+    Task<Pedido?> ObterPorIdComItensAsync(int id);
+    Task SalvarAlteracoesAsync();
 }

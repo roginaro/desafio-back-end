@@ -20,7 +20,8 @@ public class PedidoConfiguration : IEntityTypeConfiguration<Pedido>
             .HasMaxLength(50);
 
         builder.HasIndex(p => p.NumeroPedido)
-            .IsUnique();
+            .IsUnique()
+            .HasDatabaseName("IX_Pedido_NumeroPedido");
 
         builder.Property(p => p.DataCriacao)
             .IsRequired();

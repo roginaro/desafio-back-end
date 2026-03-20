@@ -1,8 +1,7 @@
 ﻿namespace Desafio.Domain.Entities;
 
-public class ItemPedido
+public class ItemPedido:Entity
 {
-    public int Id { get; private set; }
     public string Descricao { get; private set; }
     public decimal PrecoUnitario { get; private set; }
     public int Quantidade { get; private set; }

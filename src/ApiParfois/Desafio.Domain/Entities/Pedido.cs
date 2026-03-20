@@ -5,9 +5,8 @@ using System.Text;
 namespace Desafio.Domain.Entities
 {
 
-    public class Pedido
+    public class Pedido:Entity
     {
-        public int Id { get; private set; }
         public string NumeroPedido { get; private set; }
         public DateTime DataCriacao { get; private set; }
 
@@ -55,5 +54,25 @@ namespace Desafio.Domain.Entities
         {
             return _itens.Sum(i => i.Quantidade);
         }
+
+        public void AtualizarNumeroPedido(string numeroPedido)
+        {
+            if (string.IsNullOrWhiteSpace(numeroPedido))
+                throw new ArgumentException("Número do pedido não pode ser vazio", nameof(numeroPedido));
+
+            NumeroPedido = numeroPedido;
+        }
+
+        public void SubstituirItens(IEnumerable<(string Descricao, decimal PrecoUnitario, int Quantidade)> itens)
+        {
+            if (itens is null) throw new ArgumentNullException(nameof(itens));
+
+            _itens.Clear(); // EF vai entender como DELETE dos itens antigos (Cascade configurado)
+            foreach (var (descricao, preco, qtd) in itens)
+            {
+                AdicionarItem(descricao, preco, qtd); // reaproveita validações do domínio
+            }
+        }
+
     }
 }

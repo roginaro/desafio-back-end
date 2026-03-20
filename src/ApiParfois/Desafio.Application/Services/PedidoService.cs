@@ -49,19 +49,22 @@ public class PedidoService : IPedidoService
 
     public async Task<PedidoResponse?> AtualizarAsync(int id, PedidoRequest request)
     {
-        var pedidoExistente = await _repository.ObterPorIdAsync(id);
-        if (pedidoExistente == null)
+        var pedido = await _repository.ObterPorIdComItensAsync(id);
+        if (pedido == null)
             return null;
 
-        var pedidoAtualizado = new Pedido(request.Pedido);
-        
-        foreach (var item in request.Itens)
+        if (!string.Equals(pedido.NumeroPedido, request.Pedido, StringComparison.Ordinal))
         {
-            pedidoAtualizado.AdicionarItem(item.Descricao, item.PrecoUnitario, item.Qtd);
+            pedido.AtualizarNumeroPedido(request.Pedido);
         }
+        
+        var novosItens = request.Itens.Select(i => (i.Descricao, i.PrecoUnitario, i.Qtd));
+        pedido.SubstituirItens(novosItens);
 
-        await _repository.AtualizarAsync(pedidoAtualizado);
-        return MapearParaResponse(pedidoAtualizado);
+        
+        await _repository.SalvarAlteracoesAsync();
+
+        return MapearParaResponse(pedido);
     }
 
     public async Task<bool> RemoverAsync(int id)

@@ -67,4 +67,16 @@ public class PedidoRepository : IPedidoRepository
         return await _context.Pedidos
             .AnyAsync(p => p.NumeroPedido == numeroPedido);
     }
+
+    public async Task<Pedido?> ObterPorIdComItensAsync(int id)
+    {
+        IQueryable<Pedido> query = _context.Pedidos
+            .Include(p => p.Itens); 
+        return await query.FirstOrDefaultAsync(p => p.Id == id);
+    }
+
+    public async Task SalvarAlteracoesAsync()
+    {
+        await _context.SaveChangesAsync();
+    }
 }
