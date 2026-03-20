@@ -33,25 +33,25 @@ public class GlobalExceptionHandler : IExceptionHandler
                 "Requisição Inválida",
                 argEx.Message
             ),
-            
+
             InvalidOperationException invEx => (
                 StatusCodes.Status400BadRequest,
                 "Operação Inválida",
                 invEx.Message
             ),
-            
+
             KeyNotFoundException => (
                 StatusCodes.Status404NotFound,
                 "Recurso Não Encontrado",
                 "O recurso solicitado não foi encontrado"
             ),
-            
+
             UnauthorizedAccessException => (
                 StatusCodes.Status401Unauthorized,
                 "Não Autorizado",
                 "Você não tem permissão para acessar este recurso"
             ),
-            
+
             _ => (
                 StatusCodes.Status500InternalServerError,
                 "Erro Interno do Servidor",
@@ -80,10 +80,10 @@ public class GlobalExceptionHandler : IExceptionHandler
 
         // Define o status code da resposta
         httpContext.Response.StatusCode = statusCode;
-        
+
         // Retorna o JSON
         await httpContext.Response.WriteAsJsonAsync(
-            problemDetails, 
+            problemDetails,
             cancellationToken
         );
 

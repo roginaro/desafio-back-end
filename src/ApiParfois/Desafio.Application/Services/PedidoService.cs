@@ -57,11 +57,11 @@ public class PedidoService : IPedidoService
         {
             pedido.AtualizarNumeroPedido(request.Pedido);
         }
-        
+
         var novosItens = request.Itens.Select(i => (i.Descricao, i.PrecoUnitario, i.Qtd));
         pedido.SubstituirItens(novosItens);
 
-        
+
         await _repository.SalvarAlteracoesAsync();
 
         return MapearParaResponse(pedido);

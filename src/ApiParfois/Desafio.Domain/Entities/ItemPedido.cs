@@ -1,6 +1,6 @@
 ﻿namespace Desafio.Domain.Entities;
 
-public class ItemPedido:Entity
+public class ItemPedido : Entity
 {
     public string Descricao { get; private set; }
     public decimal PrecoUnitario { get; private set; }
@@ -8,8 +8,8 @@ public class ItemPedido:Entity
     public int PedidoId { get; private set; }
 
     // Construtor para EF Core
-    public ItemPedido() 
-    { 
+    public ItemPedido()
+    {
         Descricao = string.Empty;
     }
 

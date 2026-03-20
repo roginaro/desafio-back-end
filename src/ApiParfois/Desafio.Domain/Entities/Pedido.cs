@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Desafio.Domain.Entities
+﻿namespace Desafio.Domain.Entities
 {
 
-    public class Pedido:Entity
+    public class Pedido : Entity
     {
         public string NumeroPedido { get; private set; }
         public DateTime DataCriacao { get; private set; }
@@ -73,6 +69,5 @@ namespace Desafio.Domain.Entities
                 AdicionarItem(descricao, preco, qtd); // reaproveita validações do domínio
             }
         }
-
     }
 }

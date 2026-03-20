@@ -71,7 +71,7 @@ public class PedidoRepository : IPedidoRepository
     public async Task<Pedido?> ObterPorIdComItensAsync(int id)
     {
         IQueryable<Pedido> query = _context.Pedidos
-            .Include(p => p.Itens); 
+            .Include(p => p.Itens);
         return await query.FirstOrDefaultAsync(p => p.Id == id);
     }
 

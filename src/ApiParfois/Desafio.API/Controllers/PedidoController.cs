@@ -26,7 +26,7 @@ public class PedidoController : ControllerBase
     public async Task<ActionResult<PedidoResponse>> ObterPorId(int id)
     {
         var pedido = await _pedidoService.ObterPorIdAsync(id);
-        
+
         if (pedido == null)
             return NotFound(new { message = $"Pedido com ID {id} não encontrado" });
 
@@ -37,7 +37,7 @@ public class PedidoController : ControllerBase
     public async Task<ActionResult<PedidoResponse>> ObterPorNumero(string numeroPedido)
     {
         var pedido = await _pedidoService.ObterPorNumeroAsync(numeroPedido);
-        
+
         if (pedido == null)
             return NotFound(new { message = $"Pedido {numeroPedido} não encontrado" });
 
@@ -47,44 +47,26 @@ public class PedidoController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<PedidoResponse>> Criar([FromBody] PedidoRequest request)
     {
-        try
-        {
-            var pedido = await _pedidoService.CriarAsync(request);
-            return CreatedAtAction(nameof(ObterPorId), new { id = pedido.Id }, pedido);
-        }
-        catch (InvalidOperationException ex)
-        {
-            return BadRequest(new { message = ex.Message });
-        }
-        catch (ArgumentException ex)
-        {
-            return BadRequest(new { message = ex.Message });
-        }
+        var pedido = await _pedidoService.CriarAsync(request);
+        return CreatedAtAction(nameof(ObterPorId), new { id = pedido.Id }, pedido);
     }
 
     [HttpPut("{id:int}")]
     public async Task<ActionResult<PedidoResponse>> Atualizar(int id, [FromBody] PedidoRequest request)
     {
-        try
-        {
-            var pedido = await _pedidoService.AtualizarAsync(id, request);
-            
-            if (pedido == null)
-                return NotFound(new { message = $"Pedido com ID {id} não encontrado" });
+        var pedido = await _pedidoService.AtualizarAsync(id, request);
 
-            return Ok(pedido);
-        }
-        catch (ArgumentException ex)
-        {
-            return BadRequest(new { message = ex.Message });
-        }
+        if (pedido == null)
+            return NotFound(new { message = $"Pedido com ID {id} não encontrado" });
+
+        return Ok(pedido);
     }
 
     [HttpDelete("{id:int}")]
     public async Task<ActionResult> Remover(int id)
     {
         var removido = await _pedidoService.RemoverAsync(id);
-        
+
         if (!removido)
             return NotFound(new { message = $"Pedido com ID {id} não encontrado" });
 

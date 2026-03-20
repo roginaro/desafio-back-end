@@ -34,7 +34,7 @@ public class StatusValidator
         var qtdTotalItensPedido = pedido.ObterQuantidadeTotalItens();
 
         // Regra 3: APROVADO completo (valor e quantidade exatos)
-        if (request.ValorAprovado == valorTotalPedido && 
+        if (request.ValorAprovado == valorTotalPedido &&
             request.ItensAprovados == qtdTotalItensPedido)
         {
             statusList.Add("APROVADO");

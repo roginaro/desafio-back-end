@@ -18,14 +18,9 @@ public class StatusController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<StatusResponse>> ProcessarStatus([FromBody] StatusRequest request)
     {
-        try
-        {
-            var response = await _statusService.ProcessarStatusAsync(request);
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(new { message = ex.Message });
-        }
+
+        var response = await _statusService.ProcessarStatusAsync(request);
+        return Ok(response);
+
     }
 }
