@@ -18,6 +18,7 @@ public class PedidoRepository : IPedidoRepository
     {
         return await _context.Pedidos
             .Include(p => p.Itens)
+            .AsNoTracking()
             .FirstOrDefaultAsync(p => p.NumeroPedido == numeroPedido);
     }
 
@@ -25,13 +26,15 @@ public class PedidoRepository : IPedidoRepository
     {
         return await _context.Pedidos
             .Include(p => p.Itens)
+            .AsNoTracking()
             .FirstOrDefaultAsync(p => p.Id == id);
     }
-
+    //colocar paginação
     public async Task<IEnumerable<Pedido>> ObterTodosAsync()
     {
         return await _context.Pedidos
             .Include(p => p.Itens)
+            .AsNoTracking()
             .ToListAsync();
     }
 
@@ -49,7 +52,9 @@ public class PedidoRepository : IPedidoRepository
 
     public async Task RemoverAsync(int id)
     {
-        var pedido = await ObterPorIdAsync(id);
+        var pedido = await _context.Pedidos
+            .FirstOrDefaultAsync(p => p.Id == id);
+
         if (pedido != null)
         {
             _context.Pedidos.Remove(pedido);

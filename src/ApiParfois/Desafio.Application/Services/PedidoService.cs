@@ -53,7 +53,6 @@ public class PedidoService : IPedidoService
         if (pedidoExistente == null)
             return null;
 
-        // Criar novo pedido com os dados atualizados
         var pedidoAtualizado = new Pedido(request.Pedido);
         
         foreach (var item in request.Itens)
