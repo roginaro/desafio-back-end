@@ -9,7 +9,6 @@ public class StatusValidator : IStatusValidator
     // de forma mais modular (facil de estender, modificar e testar),
     // mas para simplicidade, mantive tudo na mesma classe.
 
-
     private const string STATUS_CODIGO_PEDIDO_INVALIDO = "CODIGO_PEDIDO_INVALIDO";
     private const string STATUS_REPROVADO = "REPROVADO";
     private const string STATUS_APROVADO = "APROVADO";
@@ -111,5 +110,4 @@ public class StatusValidator : IStatusValidator
             statusList.Add(STATUS_APROVADO_QTD_A_MAIOR);
         }
     }
-
 }
